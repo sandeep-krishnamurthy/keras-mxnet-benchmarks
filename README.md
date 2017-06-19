@@ -1,5 +1,7 @@
 # About
-This repository is a collection of commonly used Keras examples adapted to be used for profiling the performance of different Keras backends, mainly Apache MXNet (You could change the backend to TensorFlow). These performance profiling data may not be fully accurate. However, this should help in giving a relative insights into various performance metrics with different Keras backends.
+This repository is a collection of commonly used Keras examples adapted to be used for profiling the performance of different Keras backends, mainly Apache MXNet (You could change the backend to TensorFlow). These performance profiling data may not be fully accurate. However, this should help in giving a relative insights into various performance metrics - training time/speed, accuracy, memory consumption, with different Keras backends.
+
+You can use these examples to profile on CPU or GPU machine. You can train and profile with multiple GPUs for MXNet and Tensorflow Backends.
 
 # Installation
 # Ubuntu
@@ -64,7 +66,7 @@ $  sudo pip install nose-parameterized
 $  sudo pip install memory_profiler
 ```
 
-## Install Apache MXNet
+## Install Apache MXNet for GPU
 
 Install latest MXNet from source. Below instructions derived from [MXNet install guide](http://mxnet.io/get_started/install.html).
 
@@ -101,7 +103,7 @@ $  cd ~/keras
 $  sudo python setup.py install
 ```
 
-# How to run
+# How To Run
 
 First, you clone this repository to your test machine.
 
