@@ -67,7 +67,8 @@ def prepare_gpu_model(model, **kwargs):
     elif KERAS_BACKEND == 'tensorflow' and GPU_NUM > 1:
         return(prepare_tensorflow_multi_gpu_model(model, kwargs))
     else:
-        return(model.compile(**kwargs))
+        model.compile(**kwargs)
+        return model
 
 def prepare_cpu_model(model, **kwargs):
     model.compile(**kwargs)
