@@ -27,11 +27,6 @@ import numpy as np
 np.random.seed(1337)  # for reproducibility
 
 from os import environ
-environ['MXNET_KERAS_TEST_MACHINE'] = 'GPU'
-environ['GPU_NUM'] = '1'
-environ['KERAS_BACKEND'] = 'mxnet'
-
-from os import environ
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
