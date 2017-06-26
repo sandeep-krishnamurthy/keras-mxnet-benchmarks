@@ -63,7 +63,7 @@ model.add(LSTM(50,
                return_sequences=False,
                stateful=True))
 model.add(Dense(1))
-model.make_model(loss='mse', optimizer='rmsprop')
+model = make_model(model, loss='mse', optimizer='rmsprop')
 
 print('Training')
 def train_func():

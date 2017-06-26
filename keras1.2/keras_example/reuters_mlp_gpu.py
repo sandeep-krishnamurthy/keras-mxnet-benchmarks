@@ -51,7 +51,7 @@ model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
-model.make_model(loss='categorical_crossentropy',
+model = make_model(model, loss='categorical_crossentropy',
                  optimizer='adam',
                  metrics=['accuracy'])
 

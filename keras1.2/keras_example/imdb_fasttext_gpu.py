@@ -132,7 +132,7 @@ model.add(GlobalAveragePooling1D())
 # We project onto a single unit output layer, and squash it with a sigmoid:
 model.add(Dense(1, activation='sigmoid'))
 
-model.compile(loss='binary_crossentropy',
+model = make_model(model, loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 

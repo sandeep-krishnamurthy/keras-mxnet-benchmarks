@@ -163,7 +163,7 @@ y = Activation('hard_sigmoid')(y)
 
 # Define the model and it's mean square error loss, and compile it with Adam
 model = Model(img_input, y)
-model.make_model('adam', 'mse')
+model = make_model(model, 'adam', 'mse')
 
 # Fit the model
 def train_func():

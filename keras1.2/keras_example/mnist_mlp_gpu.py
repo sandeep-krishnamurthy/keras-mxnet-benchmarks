@@ -54,7 +54,7 @@ model.add(Activation('softmax'))
 
 model.summary()
 
-model.make_model(loss='categorical_crossentropy',
+model = make_model(model, loss='categorical_crossentropy',
               optimizer=SGD(),
               metrics=['accuracy'])
 

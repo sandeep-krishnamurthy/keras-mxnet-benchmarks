@@ -66,7 +66,7 @@ model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
 # Let's train the model using RMSprop
-model.make_model(loss='categorical_crossentropy',
+model = make_model(model, loss='categorical_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
 

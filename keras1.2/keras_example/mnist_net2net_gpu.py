@@ -231,7 +231,7 @@ def make_teacher_model(train_data, validation_data, nb_epoch=3):
     model.add(Flatten(name='flatten'))
     model.add(Dense(64, activation='relu', name='fc1'))
     model.add(Dense(nb_class, activation='softmax', name='fc2'))
-    model.make_model(loss='categorical_crossentropy',
+    model = make_model(model, loss='categorical_crossentropy',
                   optimizer=SGD(lr=0.01, momentum=0.9),
                   metrics=['accuracy'])
 
@@ -280,7 +280,7 @@ def make_wider_student_model(teacher_model, train_data,
     model.get_layer('fc1').set_weights([new_w_fc1, new_b_fc1])
     model.get_layer('fc2').set_weights([new_w_fc2, b_fc2])
 
-    model.make_model(loss='categorical_crossentropy',
+    model = make_model(model, loss='categorical_crossentropy',
                   optimizer=SGD(lr=0.001, momentum=0.9),
                   metrics=['accuracy'])
 
@@ -328,7 +328,7 @@ def make_deeper_student_model(teacher_model, train_data,
     copy_weights(teacher_model, model, layer_names=[
                  'conv1', 'conv2', 'fc1', 'fc2'])
 
-    model.make_model(loss='categorical_crossentropy',
+    model = make_model(model, loss='categorical_crossentropy',
                   optimizer=SGD(lr=0.001, momentum=0.9),
                   metrics=['accuracy'])
 

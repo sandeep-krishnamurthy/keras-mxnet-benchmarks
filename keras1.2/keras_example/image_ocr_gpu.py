@@ -472,7 +472,7 @@ def train(run_name, start_epoch, stop_epoch, img_w):
     model = Model(input=[input_data, labels, input_length, label_length], output=[loss_out])
 
     # the loss calc occurs elsewhere, so use a dummy lambda func for the loss
-    model.make_model(loss={'ctc': lambda y_true, y_pred: y_pred}, optimizer=sgd)
+    model = make_model(model, loss={'ctc': lambda y_true, y_pred: y_pred}, optimizer=sgd)
     if start_epoch > 0:
         weight_file = os.path.join(OUTPUT_DIR, os.path.join(run_name, 'weights%02d.h5' % (start_epoch - 1)))
         model.load_weights(weight_file)

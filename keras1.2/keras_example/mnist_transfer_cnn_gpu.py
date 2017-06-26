@@ -66,7 +66,7 @@ def train_model(model, train, test, nb_classes):
     Y_train = np_utils.to_categorical(train[1], nb_classes)
     Y_test = np_utils.to_categorical(test[1], nb_classes)
 
-    model.make_model(loss='categorical_crossentropy',
+    model = make_model(model, loss='categorical_crossentropy',
                   optimizer='adadelta',
                   metrics=['accuracy'])
 

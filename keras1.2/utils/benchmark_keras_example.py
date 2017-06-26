@@ -27,6 +27,7 @@ def run_benchmark():
         try:
             example = importlib.import_module(module)
             result[back][module] = copy.deepcopy(example.ret_dict)
+            del sys.modules[module]
             output = ''
             output += "{backend:<20}\n".format(backend=back)
             output += "{describe:<40}".format(describe='exampe/metric')
@@ -44,8 +45,6 @@ def run_benchmark():
         finally:
             test_summary.write(output)
             print output
-
-        del sys.modules[module]
     test_summary.close()
 
 if __name__ == '__main__':

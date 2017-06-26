@@ -206,7 +206,7 @@ answer.add(Dense(vocab_size))
 # we output a probability distribution over the vocabulary
 answer.add(Activation('softmax'))
 
-answer.make_model(optimizer='rmsprop', loss='categorical_crossentropy',
+answer = make_model(answer, optimizer='rmsprop', loss='categorical_crossentropy',
                   metrics=['accuracy'])
 
 # Note: you could use a Graph model to avoid repeat the input twice

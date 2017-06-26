@@ -141,7 +141,7 @@ x = Dense(128, activation='relu')(x)
 preds = Dense(len(labels_index), activation='softmax')(x)
 
 model = Model(sequence_input, preds)
-model.make_model(loss='categorical_crossentropy',
+model = make_model(model, loss='categorical_crossentropy',
                  optimizer='rmsprop',
                  metrics=['acc'])
 

@@ -78,7 +78,7 @@ def make_mod(dense_layer_sizes, nb_filters, nb_conv, nb_pool):
     model.add(Dense(nb_classes))
     model.add(Activation('softmax'))
 
-    model.make_model(loss='categorical_crossentropy',
+    model = make_model(model, loss='categorical_crossentropy',
                   optimizer='adadelta',
                   metrics=['accuracy'])
 

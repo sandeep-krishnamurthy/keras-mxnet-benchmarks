@@ -73,7 +73,7 @@ model.add(Activation('relu'))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
-model.make_model(loss='binary_crossentropy',
+model = make_model(model, loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 

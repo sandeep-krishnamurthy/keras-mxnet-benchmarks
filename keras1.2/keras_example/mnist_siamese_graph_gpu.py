@@ -119,7 +119,7 @@ model = Model(input=[input_a, input_b], output=distance)
 
 # train
 rms = RMSprop()
-model.make_model(loss=contrastive_loss, optimizer=rms)
+model = make_model(model, loss=contrastive_loss, optimizer=rms)
 def train_func():
     history = model.fit([tr_pairs[:, 0], tr_pairs[:, 1]], tr_y,
           validation_data=([te_pairs[:, 0], te_pairs[:, 1]], te_y),
