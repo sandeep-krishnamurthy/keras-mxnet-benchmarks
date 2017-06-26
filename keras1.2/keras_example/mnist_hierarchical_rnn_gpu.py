@@ -31,9 +31,8 @@ from keras.models import Model
 from keras.layers import Input, Dense, TimeDistributed
 from keras.layers import LSTM
 from keras.utils import np_utils
-
-import profiler
-import multi_gpu
+from profiler import profile
+from model_util import make_model
 
 # Training parameters.
 batch_size = 32
@@ -76,7 +75,7 @@ encoded_columns = LSTM(col_hidden)(encoded_rows)
 # Final predictions and model.
 prediction = Dense(nb_classes, activation='softmax')(encoded_columns)
 model = Model(input=x, output=prediction)
-model = multi_gpu.make_model(model, loss='categorical_crossentropy',
+model = make_model(model, loss='categorical_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
 

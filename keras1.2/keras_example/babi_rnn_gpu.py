@@ -70,7 +70,8 @@ from keras.layers import Dense, Merge, Dropout, RepeatVector
 from keras.layers import recurrent
 from keras.models import Sequential
 from keras.preprocessing.sequence import pad_sequences
-
+from profiler import profile
+from model_util import make_model
 
 def tokenize(sent):
     '''Return the tokens of a sentence including punctuation.
@@ -205,7 +206,7 @@ model.add(RNN(EMBED_HIDDEN_SIZE, return_sequences=False))
 model.add(Dropout(0.3))
 model.add(Dense(vocab_size, activation='softmax'))
 
-model = multi_gpu.make_model(model, optimizer='adam', loss='categorical_crossentropy',
+model = make_model(model, optimizer='adam', loss='categorical_crossentropy',
                      metrics=['accuracy'])
 
 print('Training')

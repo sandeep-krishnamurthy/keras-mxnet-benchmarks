@@ -19,9 +19,8 @@ from keras.utils.data_utils import get_file
 import numpy as np
 import random
 import sys
-
-import profiler
-import multi_gpu
+from profiler import profile
+from model_util import make_model
 
 #Result dictionary
 global ret_dict
@@ -63,7 +62,7 @@ model.add(Dense(len(chars)))
 model.add(Activation('softmax'))
 
 optimizer = RMSprop(lr=0.01)
-model = multi_gpu.make_model(model, loss='categorical_crossentropy', optimizer=optimizer)
+model = make_model(model, loss='categorical_crossentropy', optimizer=optimizer)
 
 
 def sample(preds, temperature=1.0):

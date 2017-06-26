@@ -1,1 +1,1 @@
-from ..utils import make_model, profile
+import ..util as util

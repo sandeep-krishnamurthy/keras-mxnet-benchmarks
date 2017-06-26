@@ -17,6 +17,8 @@ from keras.datasets import mnist
 from keras import backend as K
 from keras.utils import np_utils
 
+from model_util import make_model
+from profiler import profile
 
 class Antirectifier(Layer):
     '''This is the combination of a sample-wise

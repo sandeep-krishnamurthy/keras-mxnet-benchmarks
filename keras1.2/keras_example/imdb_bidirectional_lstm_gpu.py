@@ -12,6 +12,8 @@ from keras.preprocessing import sequence
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Embedding, LSTM, Bidirectional
 from keras.datasets import imdb
+from profiler import profile
+from model_util import make_model
 
 #Result dictionary
 global ret_dict
@@ -41,8 +43,7 @@ model.add(Dropout(0.5))
 model.add(Dense(1, activation='sigmoid'))
 
 # try using different optimizers and different optimizer configs
-model = multi_gpu.make_model(model, optimizer='adam',
-                                                loss='binary_crossentropy', metrics=['accuracy'])
+model = make_model(model, optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 print('Train...')
 def train_func():

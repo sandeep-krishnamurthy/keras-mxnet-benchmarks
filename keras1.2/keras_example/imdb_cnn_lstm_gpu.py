@@ -14,6 +14,8 @@ from keras.layers import Embedding
 from keras.layers import LSTM
 from keras.layers import Convolution1D, MaxPooling1D
 from keras.datasets import imdb
+from profiler import profile
+from model_util import make_model
 
 #Result dictionary
 global ret_dict
@@ -68,7 +70,7 @@ model.add(LSTM(lstm_output_size))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
-model = multi_gpu.make_model(model, loss='binary_crossentropy',
+model = make_model(model, loss='binary_crossentropy',
                                                     optimizer='adam',
                                                     metrics=['accuracy'])
 

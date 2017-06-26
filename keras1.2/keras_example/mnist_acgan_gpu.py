@@ -40,9 +40,8 @@ from keras.models import Sequential, Model
 from keras.optimizers import Adam
 from keras.utils.generic_utils import Progbar
 import numpy as np
-
-import profiler
-import multi_gpu
+from profiler import profile
+from model_util import make_model
 
 #Result dictionary
 global ret_dict
@@ -144,14 +143,14 @@ if __name__=='__main__':
 
     # build the discriminator
     discriminator = build_discriminator()
-    discriminator = multi_gpu.make_model(discriminator,
+    discriminator = make_model(discriminator,
         optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1),
         loss=['binary_crossentropy', 'sparse_categorical_crossentropy']
     )
 
     # build the generator
     generator = build_generator(latent_size)
-    generator = multi_gpu.make_model(generator,
+    generator = make_model(generator,
         optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1),
         loss='binary_crossentropy'
     )
@@ -166,7 +165,7 @@ if __name__=='__main__':
     discriminator.trainable = False
     fake, aux = discriminator(fake)
     combined = Model(input=[latent, image_class], output=[fake, aux])
-    combined = multi_gpu.make_model(combined,
+    combined = make_model(combined,
         optimizer=Adam(lr=adam_lr, beta_1=adam_beta_1),
         loss=['binary_crossentropy', 'sparse_categorical_crossentropy']
     )

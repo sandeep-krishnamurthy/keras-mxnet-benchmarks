@@ -32,7 +32,8 @@ from keras.engine.training import slice_X
 from keras.layers import Activation, TimeDistributed, Dense, RepeatVector, recurrent
 import numpy as np
 from six.moves import range
-
+from profiler import profile
+from model_util import make_model
 
 class CharacterTable(object):
     """Given a set of characters:

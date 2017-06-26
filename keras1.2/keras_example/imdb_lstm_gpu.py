@@ -19,6 +19,8 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Embedding
 from keras.layers import LSTM
 from keras.datasets import imdb
+from profiler import profile
+from model_util import make_model
 
 #Result dictionary
 global ret_dict
@@ -47,7 +49,7 @@ model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
 # try using different optimizers and different optimizer configs
-model = multi_gpu.make_model(model, loss='binary_crossentropy',
+model = make_model(model, loss='binary_crossentropy',
                                                 optimizer='adam',
                                                 metrics=['accuracy'])
 

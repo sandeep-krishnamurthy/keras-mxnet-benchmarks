@@ -13,9 +13,8 @@ from keras.models import Model
 from keras import backend as K
 from keras import objectives
 from keras.datasets import mnist
-
-import profiler
-import multi_gpu
+from profiler import profile
+from model_util import make_model
 
 # input image dimensions
 img_rows, img_cols, img_chns = 28, 28, 1
@@ -117,7 +116,7 @@ def vae_loss(x, x_decoded_mean):
     return xent_loss + kl_loss
 
 vae = Model(x, x_decoded_mean_squash)
-vae = multi_gpu.make_model(vae, optimizer='rmsprop', loss=vae_loss)
+vae = make_model(vae, optimizer='rmsprop', loss=vae_loss)
 vae.summary()
 
 # train the VAE on MNIST digits

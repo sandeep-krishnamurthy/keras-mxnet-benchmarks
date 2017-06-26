@@ -11,9 +11,8 @@ from keras.models import Model
 from keras import backend as K
 from keras import objectives
 from keras.datasets import mnist
-
-import profiler
-import multi_gpu
+from profiler import profile
+from model_util import make_model
 
 batch_size = 100
 original_dim = 784
@@ -53,7 +52,7 @@ def vae_loss(x, x_decoded_mean):
     return xent_loss + kl_loss
 
 vae = Model(x, x_decoded_mean)
-vae = multi_gpu.make_model(vae, optimizer='rmsprop', loss=vae_loss)
+vae = make_model(vae, optimizer='rmsprop', loss=vae_loss)
 
 # train the VAE on MNIST digits
 (x_train, y_train), (x_test, y_test) = mnist.load_data()

@@ -8,6 +8,8 @@ from keras.layers.convolutional_recurrent import ConvLSTM2D
 from keras.layers.normalization import BatchNormalization
 import numpy as np
 import pylab as plt
+from profiler import profile
+from model_util import make_model
 
 #Result dictionary
 global ret_dict
@@ -39,7 +41,7 @@ seq.add(Convolution3D(nb_filter=1, kernel_dim1=1, kernel_dim2=3,
                       kernel_dim3=3, activation='sigmoid',
                       border_mode='same', dim_ordering='tf'))
 
-seq = multi_gpu.make_model(seq, loss='binary_crossentropy', optimizer='adadelta')
+seq = make_model(seq, loss='binary_crossentropy', optimizer='adadelta')
 
 
 # Artificial data generation:
