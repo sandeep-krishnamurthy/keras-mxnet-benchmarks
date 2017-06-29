@@ -51,7 +51,7 @@ def train_func():
               batch_size=batch_size,
               nb_epoch=4,
               validation_data=[X_test, y_test])
-ret = profile(train_func())
+ret = profile(train_func)
 
 ret_dict["training_time"] = str(ret[0]) + ' sec'
 ret_dict["max_memory"] = str(ret[1]) + ' MB'

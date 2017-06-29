@@ -64,7 +64,7 @@ def train_func():
                         verbose=1, validation_data=(X_test, Y_test))
     ret_dict["training_accuracy"] = history.history['acc'][-1]
     ret_dict["test_accuracy"] = history.history['val_acc'][-1]
-ret = profile(train_func())
+ret = profile(train_func)
 
 ret_dict["training_time"] = str(ret[0]) + ' sec'
 ret_dict["max_memory"] = str(ret[1]) + ' MB'
