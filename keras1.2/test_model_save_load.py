@@ -26,7 +26,7 @@ Five digits inverted:
 
 
 This script tests training, saving, loading and predicting addition_rnn model.
-Use 4 gpu for training.
+Use 1 gpu for training.
 '''
 
 from __future__ import print_function
@@ -151,7 +151,7 @@ RNN = recurrent.LSTM
 HIDDEN_SIZE = 128
 BATCH_SIZE = 128
 LAYERS = 1
-context = ['gpu(0)', 'gpu(1)', 'gpu(2)', 'gpu(3)']
+context = ['gpu(0)']
 
 print('Build model...')
 model = Sequential()
@@ -211,8 +211,8 @@ for iteration in range(1, 200):
 #Save and load trained model.
 #then run prediction on it.
 print("Predicting with pretrained model...")
-fnmae = 'add_rnn.'
+fname = 'add_rnn.hdf5'
 save_model(model, fname)
 new_model = load_model(fname)
-pred_acc = new_model.predict(X_val)
-print(pred_acc)
+loss, acc = model.evaluate(X_val, y_val)
+assert acc >= 0.98, "Low validation accuracy."
