@@ -486,7 +486,7 @@ def train(run_name, start_epoch, stop_epoch, img_w):
                                       callbacks=[viz_cb, img_gen], initial_epoch=start_epoch)
         ret_dict["training_accuracy"] = history.history['acc'][-1]
         ret_dict["test_accuracy"] = history.history['val_acc'][-1]
-    ret = profile(train_func())
+    ret = profile(train_func)
 
     ret_dict["training_time"] = str(ret[0]) + ' sec'
     ret_dict["max_memory"] = str(ret[1]) + ' MB'

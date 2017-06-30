@@ -71,14 +71,15 @@ def train_model(model, train, test, nb_classes):
                   metrics=['accuracy'])
 
     t = now()
-    model.fit(X_train, Y_train,
-              batch_size=batch_size, nb_epoch=nb_epoch,
-              verbose=1,
-              validation_data=(X_test, Y_test))
+    history = model.fit(X_train, Y_train,
+                        batch_size=batch_size, nb_epoch=nb_epoch,
+                        verbose=1,
+                        validation_data=(X_test, Y_test))
     print('Training time: %s' % (now() - t))
     score = model.evaluate(X_test, Y_test, verbose=0)
     print('Test score:', score[0])
     print('Test accuracy:', score[1])
+    return history
 
 
 # the data, shuffled and split between train and test sets
@@ -134,7 +135,7 @@ def train_func():
                 (X_test_gte5, y_test_gte5), nb_classes)
     ret_dict["training_accuracy"] = history.history['acc'][-1]
     ret_dict["test_accuracy"] = history.history['val_acc'][-1]
-ret = profile(train_func())
+ret = profile(train_func)
 
 ret_dict["training_time"] = str(ret[0]) + ' sec'
 ret_dict["max_memory"] = str(ret[1]) + ' MB'

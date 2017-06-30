@@ -80,11 +80,10 @@ def train_func():
         print()
         print('-' * 50)
         print('Iteration', iteration)
-        with profiler.Profiler(ret_dict):
-            history = model.fit(X, y, batch_size=128, nb_epoch=1)
+        history = model.fit(X, y, batch_size=128, nb_epoch=1)
         ret_dict["training_accuracy"] = history.history['loss'][-1]
         ret_dict["test_accuracy"] = 0
-ret = profile(train_func())
+ret = profile(train_func)
 
 ret_dict["training_time"] = str(ret[0]) + ' sec'
 ret_dict["max_memory"] = str(ret[1]) + ' MB'

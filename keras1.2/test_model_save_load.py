@@ -24,16 +24,19 @@ Four digits inverted:
 Five digits inverted:
 + One layer LSTM (128 HN), 550k training examples = 99% train/test accuracy in 30 epochs
 
+
+This script tests training, saving, loading and predicting addition_rnn model.
+Use 1 gpu for training.
 '''
 
 from __future__ import print_function
-from keras.models import Sequential
+import tempfile
+from keras.models import Sequential, save_model, load_model
 from keras.engine.training import slice_X
 from keras.layers import Activation, TimeDistributed, Dense, RepeatVector, recurrent
 import numpy as np
 from six.moves import range
-from profiler import profile
-from model_util import make_model
+
 
 class CharacterTable(object):
     """Given a set of characters:
@@ -148,6 +151,7 @@ RNN = recurrent.LSTM
 HIDDEN_SIZE = 128
 BATCH_SIZE = 128
 LAYERS = 1
+context = ['gpu(0)']
 
 print('Build model...')
 model = Sequential()
@@ -171,26 +175,44 @@ for _ in range(LAYERS):
 # of the output sequence, decide which character should be chosen.
 model.add(TimeDistributed(Dense(len(chars))))
 model.add(Activation('softmax'))
-model = make_model(model, optimizer='adam', loss='categorical_crossentropy',
-                     metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'],
+              context=context)
 model.summary()
-
-#Result dictionary
-global ret_dict
-ret_dict = dict()
 
 # Train the model each generation and show predictions against the validation
 # dataset.
-def train_func():
-    for iteration in range(1, 200):
-        print()
-        print('-' * 50)
-        print('Iteration', iteration)
-        model.fit(X_train, y_train, batch_size=BATCH_SIZE, nb_epoch=1,
-                  validation_data=(X_val, y_val))
-ret = profile(train_func)
+print("Training Model...")
+for iteration in range(1, 200):
+    print()
+    print('-' * 50)
+    print('Iteration', iteration)
+    model.fit(X_train, y_train, batch_size=BATCH_SIZE, nb_epoch=1,
+              validation_data=(X_val, y_val))
+    # Select 10 samples from the validation set at random so we can visualize
+    # errors.
+    for i in range(10):
+        ind = np.random.randint(0, len(X_val))
+        rowX, rowy = X_val[np.array([ind])], y_val[np.array([ind])]
+        preds = model.predict_classes(rowX, verbose=0)
+        q = ctable.decode(rowX[0])
+        correct = ctable.decode(rowy[0])
+        guess = ctable.decode(preds[0], calc_argmax=False)
+        print('Q', q[::-1] if INVERT else q)
+        print('T', correct)
+        if correct == guess:
+            print(colors.ok + '☑' + colors.close, end=" ")
+        else:
+            print(colors.fail + '☒' + colors.close, end=" ")
+        print(guess)
+        print('---')
 
-ret_dict["training_time"] = str(ret[0]) + ' sec'
-ret_dict["max_memory"] = str(ret[1]) + ' MB'
-ret_dict["training_accuracy"] = model.evaluate(X_train, y_train, verbose=0)[1]
-ret_dict["test_accuracy"] = model.evaluate(X_val, y_val, verbose=0)[1]
+#Save and load trained model.
+#then run prediction on it.
+print("Predicting with pretrained model...")
+fname = 'add_rnn.hdf5'
+save_model(model, fname)
+new_model = load_model(fname)
+loss, acc = model.evaluate(X_val, y_val)
+assert acc >= 0.98, "Low validation accuracy."

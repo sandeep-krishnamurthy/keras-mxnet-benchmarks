@@ -8,7 +8,7 @@ sys.path.append('keras_example')
 back = os.environ['KERAS_BACKEND']
 GPU_NUM = int(os.environ['GPU_NUM'])
 metrics = ["training_time", "max_memory", "training_accuracy", "test_accuracy"]
-example_list=list()
+example_list = list()
 result = dict()
 
 
@@ -23,6 +23,8 @@ def run_benchmark():
     example_set = os.listdir(example_dir) \
                   if len(example_list) == 0 else example_list
     for fname in example_set:
+        if fname.startswith('__init__'):
+            continue
         module = fname[:-3] if fname.endswith('.py') else fname
         try:
             example = importlib.import_module(module)

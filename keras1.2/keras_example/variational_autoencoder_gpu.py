@@ -4,6 +4,7 @@ Reference: "Auto-Encoding Variational Bayes" https://arxiv.org/abs/1312.6114
 '''
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 from scipy.stats import norm
 
 from keras.layers import Input, Dense, Lambda
@@ -21,7 +22,7 @@ intermediate_dim = 256
 nb_epoch = 50
 epsilon_std = 1.0
 
-x = Input(batch_shape=(batch_size, original_dim))
+x = Input(batch_shape=(batch_size/int(os.environ['GPU_NUM']), original_dim))
 h = Dense(intermediate_dim, activation='relu')(x)
 z_mean = Dense(latent_dim)(h)
 z_log_var = Dense(latent_dim)(h)
@@ -29,7 +30,7 @@ z_log_var = Dense(latent_dim)(h)
 
 def sampling(args):
     z_mean, z_log_var = args
-    epsilon = K.random_normal(shape=(batch_size, latent_dim), mean=0.,
+    epsilon = K.random_normal(shape=(batch_size/int(os.environ['GPU_NUM']), latent_dim), mean=0.,
                               std=epsilon_std)
     return z_mean + K.exp(z_log_var / 2) * epsilon
 
@@ -70,7 +71,7 @@ def train_func():
                       validation_data=(x_test, x_test))
     ret_dict["training_accuracy"] = history.history['loss'][-1]
     ret_dict["test_accuracy"] = history.history['val_loss'][-1]
-ret = profile(train_func())
+ret = profile(train_func)
 
 ret_dict["training_time"] = str(ret[0]) + ' sec'
 ret_dict["max_memory"] = str(ret[1]) + ' MB'

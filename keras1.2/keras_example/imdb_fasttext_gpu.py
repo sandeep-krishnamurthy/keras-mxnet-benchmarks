@@ -137,13 +137,13 @@ model = make_model(model, loss='binary_crossentropy',
               metrics=['accuracy'])
 
 def train_func():
-    model.fit(X_train, y_train,
-              batch_size=batch_size,
-              nb_epoch=nb_epoch,
-              validation_data=(X_test, y_test))
+    history = model.fit(X_train, y_train,
+                        batch_size=batch_size,
+                        nb_epoch=nb_epoch,
+                        validation_data=(X_test, y_test))
     ret_dict["training_accuracy"] = history.history['acc'][-1]
     ret_dict["test_accuracy"] = history.history['val_acc'][-1]
-ret = profile(train_func())
+ret = profile(train_func)
 
 ret_dict["training_time"] = str(ret[0]) + ' sec'
 ret_dict["max_memory"] = str(ret[1]) + ' MB'

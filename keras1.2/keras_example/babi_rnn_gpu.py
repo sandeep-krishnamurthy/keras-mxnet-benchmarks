@@ -212,7 +212,7 @@ model = make_model(model, optimizer='adam', loss='categorical_crossentropy',
 print('Training')
 def train_func():
     model.fit([X, Xq], Y, batch_size=BATCH_SIZE, nb_epoch=EPOCHS, validation_split=0.05)
-ret = profile(train_func())
+ret = profile(train_func)
 
 ret_dict["training_time"] = str(ret[0]) + ' sec'
 ret_dict["max_memory"] = str(ret[1]) + ' MB'

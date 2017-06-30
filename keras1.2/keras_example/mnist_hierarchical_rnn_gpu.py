@@ -87,7 +87,7 @@ ret_dict = dict()
 def train_func():
     model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epochs,
               verbose=1, validation_data=(X_test, Y_test))
-ret = profile(train_func())
+ret = profile(train_func)
 
 ret_dict["training_time"] = str(ret[0]) + ' sec'
 ret_dict["max_memory"] = str(ret[1]) + ' MB'
