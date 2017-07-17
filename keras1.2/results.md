@@ -32,6 +32,33 @@ MXNet distributes the data batch across all GPUs. i.e., if batch size is 512 and
 | Test accuracy                 | 0.67    | 0.52    | 0.60    | 0.59    | 0.42     |
 | Maximum Memory Consumption    | 5086    | 5048    | 5012    | 9786    | 15187    |
 
+### Reduce Randomization
+
+For different number of GPUs, batchsize stays the same as 64.
+* `Epochs` - 100
+
+#### MXNet Backend
+|                               | GPU (1) | GPU (2) | GPU (4) | GPU (8) | GPU (16) |
+|-------------------------------|:-------:|:-------:|:-------:|:-------:|:--------:|
+| Training time (secs)          | 10815.3 | 9421.21 | 8880.94 | 10684.4 | 21488.6  |
+| Average time per epoch (secs) | 108.15  | 94.21   | 88.81   | 106.84  | 214.88   |
+| Images processed per sec      | 554.76  | 636.86  | 675.60  | 561.57  | 279.23   |
+| Training accuracy             | 0.95    | 0.95    | 0.94    | 0.72    | 0.55     |
+| Test accuracy                 | 0.78    | 0.80    | 0.80    | 0.14    | 0.10     |
+| Maximum Memory Consumption    | 5392    | 5851    | 7003    | 9786    | 11503    |
+
+#### Tensorflow Backend
+|                               | GPU (1) | GPU (2) | GPU (4) | GPU (8) | GPU (16) |
+|-------------------------------|:-------:|:-------:|:-------:|:-------:|:--------:|
+| Training time (secs)          | 10946.0 | 19742.9 | 26639.8 | 44295.7 | 95984.5  |
+| Average time per epoch (secs) | 109.46  | 197.42  | 266.40  | 442.96  | 959.84   |
+| Images processed per sec      | 404.62  | 303.91  | 225.23  | 135.45  | 62.51    |
+| Training accuracy             | 0.95    | 0.94    | 0.91    | 0.78    | 0.84     |
+| Test accuracy                 | 0.75    | 0.78    | 0.62    | 0.57    | 0.78     |
+| Maximum Memory Consumption    | 10946   | 21890   | 43778   | 87544   | 175088   |
+
+
+
 ## Inception_v3
 
 ### Setup
@@ -50,3 +77,25 @@ MXNet distributes the data batch across all GPUs. i.e., if batch size is 512 and
 | Training accuracy             |0.78     |0.80     |0.81     |0.81    |
 | Test accuracy                 |0.73     |0.75     |0.80     |0.78    |
 | Maximum Memory Consumption    |10319    |9542     |10168    |12183   |
+
+### Reduce Randomization
+
+* `Epochs` - 25
+
+#### MXNet Backend
+|                               | GPU (1) | GPU (2) | GPU (4) | GPU(8) | GPU(16) |
+|-------------------------------|:-------:|:-------:|:-------:|:------:|:-------:|
+| Training time (secs)          |54609    |29342    |17316    |14170   |12971    |
+| Average time per epoch (secs) |2184     |1174     |693      |567     |519      |
+| Training accuracy             |0.99     |0.99     |0.99     |0.99    |0.99     |
+| Test accuracy                 |0.83     |0.86     |0.85     |0.87    |0.82     |
+| Maximum Memory Consumption    |10896    |10961    |11846    |13701   |17628    |
+
+#### Tensorflow Backend
+|                               | GPU (1) | GPU (2) | GPU (4) | GPU(8) | GPU(16) |
+|-------------------------------|:-------:|:-------:|:-------:|:------:|:-------:|
+| Training time (secs)          |121480   |72657    |49758    |44042   |78247    |
+| Average time per epoch (secs) |4859     |2906     |1990     |1761    |3130     |
+| Training accuracy             |0.97     |0.97     |0.96     |0.96    |0.96     |
+| Test accuracy                 |0.71     |0.81     |0.83     |0.71    |0.79     |
+| Maximum Memory Consumption    |10946    |21890    |43778    |87544   |175088   |
