@@ -33,28 +33,27 @@ MXNet distributes the data batch across all GPUs. i.e., if batch size is 512 and
 | Maximum Memory Consumption    | 5086    | 5048    | 5012    | 9786    | 15187    |
 
 ### Reduce Randomization
-
-For different number of GPUs, batchsize stays the same as 64.
+* `random seed` - 1337
 * `Epochs` - 100
 
 #### MXNet Backend
 |                               | GPU (1) | GPU (2) | GPU (4) | GPU (8) | GPU (16) |
 |-------------------------------|:-------:|:-------:|:-------:|:-------:|:--------:|
-| Training time (secs)          | 10815.3 | 9421.21 | 8880.94 | 10684.4 | 21488.6  |
-| Average time per epoch (secs) | 108.15  | 94.21   | 88.81   | 106.84  | 214.88   |
-| Images processed per sec      | 554.76  | 636.86  | 675.60  | 561.57  | 279.23   |
-| Training accuracy             | 0.95    | 0.95    | 0.94    | 0.72    | 0.55     |
-| Test accuracy                 | 0.78    | 0.80    | 0.80    | 0.14    | 0.10     |
-| Maximum Memory Consumption    | 5392    | 5851    | 7003    | 9786    | 11503    |
+| Training time (secs)          | 15860.5 | 9456.02 | 4475.55 | 3429.55 | 3040.19  |
+| Average time per epoch (secs) | 158.61  | 94.56   | 44.76   | 34.30   | 304.02   |
+| Images processed per sec      | 378.30  | 634.52  | 1340.62 | 1749.50 | 1973.56  |
+| Training accuracy             | 0.95    | 0.95    | 0.95    | 0.95    | 0.94     |
+| Test accuracy                 | 0.80    | 0.75    | 0.78    | 0.75    | 0.77     |
+| Maximum Memory Consumption    | 5091    | 5855    | 5126    | 9826    | 15267    |
 
 #### Tensorflow Backend
 |                               | GPU (1) | GPU (2) | GPU (4) | GPU (8) | GPU (16) |
 |-------------------------------|:-------:|:-------:|:-------:|:-------:|:--------:|
-| Training time (secs)          | 10946.0 | 19742.9 | 26639.8 | 44295.7 | 95984.5  |
-| Average time per epoch (secs) | 109.46  | 197.42  | 266.40  | 442.96  | 959.84   |
-| Images processed per sec      | 404.62  | 303.91  | 225.23  | 135.45  | 62.51    |
-| Training accuracy             | 0.95    | 0.94    | 0.91    | 0.78    | 0.84     |
-| Test accuracy                 | 0.75    | 0.78    | 0.62    | 0.57    | 0.78     |
+| Training time (secs)          | 23749.9 | 18029.7 | 12230.6 | 10911.9 | 10907.5  |
+| Average time per epoch (secs) | 237.50  | 180.30  | 122.31  | 109.12  | 109.08   |
+| Images processed per sec      | 252.63  | 332.78  | 490.57  | 549.86  | 550.08   |
+| Training accuracy             | 0.95    | 0.94    | 0.90    | 0.84    | 0.77     |
+| Test accuracy                 | 0.80    | 0.76    | 0.76    | 0.75    | 0.73     |
 | Maximum Memory Consumption    | 10946   | 21890   | 43778   | 87544   | 175088   |
 
 
